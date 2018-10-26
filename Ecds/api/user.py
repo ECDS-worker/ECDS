@@ -1,4 +1,5 @@
 import random
+import base64
 
 from api.comment import Rest
 from django.contrib.auth import authenticate, logout, login
@@ -14,7 +15,9 @@ class SessionRest(Rest):
 
         username = data.get('username', '')
         password = data.get('password', '')
-        permission_code = data.get('permission_code', '')
+        username = str(base64.b64decode(username), encoding='utf-8')[8:]
+        password = str(base64.b64decode(password), encoding="utf-8")[8:]
+        permission_code = data.get('permission_code', '0')
         request.session["permission_code"] = permission_code
 
         retu_data = {
@@ -37,6 +40,7 @@ class SessionRest(Rest):
                 retu_data["msg"] = "登陆成功"
                 retu_data["status"] = "200"
                 retu_data["permission_code"] = permission_code
+
             else:
                 retu_data["msg"] = "没有登陆权限"
                 retu_data["status"] = "403"

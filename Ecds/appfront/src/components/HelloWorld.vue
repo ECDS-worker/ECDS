@@ -9,7 +9,6 @@
 </template>
 
 <script>
-  import Axios from 'axios'
   export default {
     name: 'HelloWorld',
     data() {
@@ -42,7 +41,8 @@
             }
           };
           // url为对应的后端接口
-         this.$axios.post('/api/v1/uploadfile', formData, config).then(function (response) {
+         //this.$axios.post('/api/v1/uploadfile', formData, config).then(function (response) {
+          this.$axios.get('/api/question/', formData, config).then(function (response) {
             alert('上传成功')
             console.log(response)
           }).catch(function (error) {
@@ -58,11 +58,10 @@
           asdasd: "dfsds"
 
         };
-        this.$axios({method: 'get', url: "/api/v1/uploadfile", data: data, responseType: 'blob',}).then((data) => {
+        this.$axios({method: 'get', url: "/api/question/", data: data, responseType: 'blob',}).then((data) => {
             if (!data) {
               return
-            }
-            debugger
+            }ii9
             let url = window.URL.createObjectURL(data.data);
             let link = document.createElement('a');
             link.style.display = 'none';

@@ -15,7 +15,7 @@ import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# sys.path.insert(0, os.path.join(BASE_DIR, 'EcdsApp'))
+sys.path.insert(0, os.path.join(BASE_DIR, 'EcdsApp'))
 sys.path.insert(0, os.path.join(BASE_DIR, 'extra_app'))
 
 # Quick-start development settings - unsuitable for production
@@ -90,12 +90,20 @@ WSGI_APPLICATION = 'Ecds.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     #     'ENGINE': 'django.db.backends.mysql',
+    #     #     'NAME': 'question',
+    #     #     'USER': 'root',
+    #     #     'PASSWORD': '123456',
+    #     #     'HOST': 'localhost',
+    #     #     'PORT': 3306
+    #     # }
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'question',
         'USER': 'root',
         'PASSWORD': 'hhh123',
-        'HOST': 'localhost',
+        'HOST': '10.3.60.36',
         'PORT': 3306
     }
 }

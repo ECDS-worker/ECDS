@@ -2,7 +2,6 @@ from django.db import models
 from datetime import date
 from django.contrib.auth.models import AbstractUser, User
 from django.conf import settings
-import os
 
 # Create your models here.
 
@@ -29,9 +28,9 @@ class UserProfile(AbstractUser):
         return self.username
 
     @classmethod
-    def create(cls, password, last_login, is_superuser, username, date_joined, name):
+    def create(cls, password, last_login, is_superuser, username, date_joined):
         return cls(password=password, last_login=last_login, is_superuser=is_superuser, username=username,
-                   date_joined=date_joined, name=name)
+                   date_joined=date_joined)
 
 
 class UserInfo(models.Model):

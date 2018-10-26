@@ -8,7 +8,7 @@ def customer_required(func):
         if not request.user.is_authenticated:
             return not_authenbticated()
         permission_code = request.session.get('permission_code')
-        if permission_code not in [3, 4]:
+        if permission_code not in ['3', '4']:
             return permission_denied()
         return func(self, request, *args, **kwargs)
     return _wrapper
@@ -20,7 +20,7 @@ def userinfo_required(func):
         if not request.user.is_authenticated:
             return not_authenbticated()
         permission_code = request.session.get('permission_code')
-        if permission_code not in [1, 2]:
+        if permission_code not in ['1', '2']:
             return permission_denied()
         return func(self, request, *args, **kwargs)
     return _wrapper
