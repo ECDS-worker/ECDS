@@ -15,8 +15,7 @@ import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, os.path.join(BASE_DIR, 'EcdsApp'))
-sys.path.insert(0, os.path.join(BASE_DIR, 'extra_app'))
+# sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
@@ -42,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'EcdsApp',
-    'xadmin',
+    'CommenApp',
     'crispy_forms',
     'corsheaders',
 ]
@@ -100,10 +99,10 @@ DATABASES = {
     #     # }
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'question',
+        'NAME': 'test',
         'USER': 'root',
         'PASSWORD': 'hhh123',
-        'HOST': '10.3.60.36',
+        'HOST': '10.3.60.108',
         'PORT': 3306
     }
 }

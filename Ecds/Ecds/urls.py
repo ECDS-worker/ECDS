@@ -16,15 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
-import xadmin
+# import xadmin
 from django.views.generic import TemplateView
 
 from api.urls import api
+from api_ecds.urls import api_ecds
 
 urlpatterns = [
-    # url('admin/', admin.site.urls),
-    url(r'xadmin/', xadmin.site.urls),
+    url('admin/', admin.site.urls),
+    # url(r'xadmin/', xadmin.site.urls),
     url(r'api/v1/', include(api.urls)),
+    url(r'api_ecds/v1/', include(api_ecds.urls)),
     url(r'^$', TemplateView.as_view(template_name="index.html")),
-
 ]

@@ -1,0 +1,57 @@
+DELETE SwitchAudit
+FROM
+	SwitchAction
+LEFT JOIN SwitchAudit ON SwitchAction.id = SwitchAudit.switch_action_id
+WHERE
+	SwitchAction.ins_id = 3133310004;
+
+-- 删除异常表
+DELETE SwitchExcept
+FROM
+	SwitchAction
+LEFT JOIN SwitchExcept ON SwitchAction.id = SwitchExcept.switch_action_id
+WHERE
+	SwitchAction.ins_id = 3133310004;
+
+
+-- 删除action表数据
+
+DELETE SwitchAction
+FROM
+	SwitchAction
+WHERE
+	SwitchAction.ins_id = 3133310004;
+
+-- 查询未执行机构名称
+SELECT i.ins_nm FROM insInfo i WHERE i.ins_cd NOT IN(SELECT DISTINCT(s.ins_id) FROM SwitchAction s);
+
+
+-- 查询未执行完成的机构名
+SELECT i.ins_nm FROM InsInfo i WHERE i.ins_cd NOT IN(SELECT DISTINCT(s.ins_id) FROM SwitchAction sWHERE s.proc_st = "30");
+
+
+查询所有未执行完成的机构所执行的 步骤 号      合并处理
+SELECT
+	i.ins_cd,
+	i.ins_nm,
+	GROUP_CONCAT(s.step_id) step_id,
+	GROUP_CONCAT(DISTINCT s.stage_id) stage_id,
+	COUNT(s.proc_st) proc_st
+FROM
+	InsInfo i
+LEFT JOIN switchaction s ON i.ins_cd = s.ins_id
+WHERE
+	i.ins_cd NOT IN (
+		SELECT DISTINCT
+			(s.ins_id)
+		FROM
+			SwitchAction s
+			WHERE
+			s.proc_st = "30"
+	)
+GROUP BY
+	i.ins_cd;
+
+更新用户信息
+UPDATE userinfo SET open_id = NULL, user_nm = NULL, email = NULL, landline_no = NULL, phone_no = NULL, user_st = 0 WHERE institution_id =  AND user_tp = 
+

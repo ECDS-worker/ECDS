@@ -12,7 +12,7 @@ def params_error(error):
 
 
 def not_authenbticated():
-    return HttpResponse('{"msg":"未登录"}', status=401, content_type='application/json')
+    return HttpResponse('{"msg":"未登陆"}', status=401, content_type='application/json')
 
 
 def permission_denied():
@@ -21,4 +21,3 @@ def permission_denied():
 
 def json_response(data):
     return HttpResponse(json.dumps(data), status=200, content_type='application/json')
-

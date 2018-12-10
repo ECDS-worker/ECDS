@@ -1,16 +1,9 @@
-import random
-import json
-from datetime import datetime
-
-from django.http.response import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.conf.urls import url
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, logout, login
-
 
 from api.utils import *
-from EcdsApp.models import *
+
+
 # from api.decorators import *
 
 

@@ -1,0 +1,7 @@
+def qa(xxxxxxxxxx_1) targq(GW1000_3) defpsist(yes) replace
+def qa(xxxxxxxxxx_2) targq(GW1000_4) defpsist(yes) replace
+def qr(Gxxxxxxxxxx_1) rname(xxxxxxxxxx_1) rqmname(QMEMBFE) xmitq(QMxxxxxxxxxx) defpsist(yes) replace
+def qr(Gxxxxxxxxxx_2) rname(xxxxxxxxxx_2) rqmname(QMEMBFE) xmitq(QMxxxxxxxxxx) defpsist(yes) replace
+def ql(QMxxxxxxxxxx) usage(XMITQ) defpsist(YES) maxdepth(100000) maxmsgl(104857600) trigger trigtype(FIRST) trigdata(GW1000.xxxxxxxxxx) initq(SYSTEM.CHANNEL.INITQ) replace
+def chl(GW1000.xxxxxxxxxx) chltype(SDR) discint(1800) locladdr('') maxmsgl(104857600) conname('IP_dz(1417)') xmitq(QMxxxxxxxxxx) trptype(tcp) shortrty(10000) shorttmr(30) longtmr(300) longrty(999999999) batchsz(50) replace
+def chl(xxxxxxxxxx.GW1000) chltype(rcvr) maxmsgl(104857600) trptype(tcp) replace
