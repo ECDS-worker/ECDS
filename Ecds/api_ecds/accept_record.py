@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from io import BytesIO
 from datetime import datetime
 
-from EcdsApp.models import NetInfo, ApplyInfo, Insinfo, TestFile
+from EcdsApp.models import TestFile
 from api.utils import json_response
 from api.comment import Rest
 

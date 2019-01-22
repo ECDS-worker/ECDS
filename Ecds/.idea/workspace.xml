@@ -2,51 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0bc6766d-e991-43b5-8c01-b043084eac93" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/EcdsApp/migrations/0002_fornpro_ins_nm.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/EcdsApp/migrations/0003_netinfo_ins_nm.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/EcdsApp/migrations/0004_auto_20181210_1711.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/EcdsApp/migrations/0005_auto_20181210_1712.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/EcdsApp/migrations/0006_auto_20181212_0957.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/EcdsApp/migrations/0007_fornpro_mbfe_type.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/EcdsApp/migrations/0008_auto_20181217_1718.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/EcdsApp/migrations/0009_auto_20190114_1516.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/api/Tec_accept.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/api_ecds/accept_record.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/api_ecds/audit_table.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/api_ecds/check_search.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/api_ecds/email.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/media/upload/apply_info/江西工业银行.docx" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/media/upload/apply_temp/技术验收软件信息表01.docx" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/media/upload/avatar/01.pdf" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/media/upload/avatar/accept_check.xls" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/media/upload/avatar/mk_excel.xls" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/media/upload/excel/test1.xlsx" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/media/upload/tec_accept/江西工业银行.docx" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/Ecds/settings.py" afterPath="$PROJECT_DIR$/Ecds/settings.py" />
-      <change beforePath="$PROJECT_DIR$/EcdsApp/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/EcdsApp/migrations/0001_initial.py" />
-      <change beforePath="$PROJECT_DIR$/EcdsApp/models.py" afterPath="$PROJECT_DIR$/EcdsApp/models.py" />
-      <change beforePath="$PROJECT_DIR$/EcdsApp/tests.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/api/apply_info.py" afterPath="$PROJECT_DIR$/api/apply_info.py" />
-      <change beforePath="$PROJECT_DIR$/api/createuser.py" afterPath="$PROJECT_DIR$/api/createuser.py" />
-      <change beforePath="$PROJECT_DIR$/api/decorators.py" afterPath="$PROJECT_DIR$/api/decorators.py" />
-      <change beforePath="$PROJECT_DIR$/api/excel_file.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/api/filedownload.py" afterPath="$PROJECT_DIR$/api/filedownload.py" />
-      <change beforePath="$PROJECT_DIR$/api/first_column.py" afterPath="$PROJECT_DIR$/api/first_column.py" />
-      <change beforePath="$PROJECT_DIR$/api/mk_word.py" afterPath="$PROJECT_DIR$/api/mk_word.py" />
-      <change beforePath="$PROJECT_DIR$/api/search.py" afterPath="$PROJECT_DIR$/api/search.py" />
-      <change beforePath="$PROJECT_DIR$/api/urls.py" afterPath="$PROJECT_DIR$/api/urls.py" />
-      <change beforePath="$PROJECT_DIR$/api_ecds/audit_test.py" afterPath="$PROJECT_DIR$/api_ecds/audit_test.py" />
-      <change beforePath="$PROJECT_DIR$/api_ecds/excel_file.py" afterPath="$PROJECT_DIR$/api_ecds/excel_file.py" />
-      <change beforePath="$PROJECT_DIR$/api_ecds/search.py" afterPath="$PROJECT_DIR$/api_ecds/search.py" />
-      <change beforePath="$PROJECT_DIR$/api_ecds/urls.py" afterPath="$PROJECT_DIR$/api_ecds/urls.py" />
-      <change beforePath="$PROJECT_DIR$/media/upload/apply_info/sdgsfg.docx" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/media/upload/apply_temp/申请信息模板.docx" afterPath="$PROJECT_DIR$/media/upload/apply_temp/申请信息模板.docx" />
-      <change beforePath="$PROJECT_DIR$/media/upload/avatar/test1.xls" afterPath="$PROJECT_DIR$/media/upload/avatar/test1.xls" />
-      <change beforePath="$PROJECT_DIR$/media/upload/avatar/候豪豪-周报总结.rar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/test.py" afterPath="$PROJECT_DIR$/test.py" />
-      <change beforePath="$PROJECT_DIR$/../ecds.rar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/api_ecds/accept_record.py" afterPath="$PROJECT_DIR$/api_ecds/accept_record.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -147,36 +103,18 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="check_search.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api_ecds/check_search.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-              <folding>
-                <element signature="e#378#1480#0" expanded="false" />
-                <element signature="e#1618#3636#0" expanded="false" />
-                <element signature="e#3691#6102#0" expanded="false" />
-                <element signature="e#6262#10746#0" expanded="false" />
-                <element signature="e#6750#7658#0" expanded="false" />
-                <element signature="e#10802#13868#0" expanded="false" />
-                <element signature="e#11159#11459#0" expanded="false" />
-                <element signature="e#11496#12061#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="accept_record.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/api_ecds/accept_record.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="27">
-              <caret line="1" column="9" lean-forward="false" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
+            <state relative-caret-position="206">
+              <caret line="8" column="28" lean-forward="true" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
               <folding>
-                <element signature="e#275#2967#0" expanded="false" />
-                <element signature="e#275#312#1" expanded="false" />
-                <element signature="e#366#2967#0" expanded="false" />
-                <element signature="e#700#1392#0" expanded="false" />
-                <element signature="e#2999#6056#0" expanded="false" />
+                <element signature="e#0#11#0" expanded="true" />
+                <element signature="e#246#2938#0" expanded="false" />
+                <element signature="e#246#283#1" expanded="false" />
+                <element signature="e#337#2938#0" expanded="false" />
+                <element signature="e#671#1363#0" expanded="false" />
+                <element signature="e#2970#6027#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -185,8 +123,8 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api_ecds/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+            <state relative-caret-position="422">
+              <caret line="19" column="19" lean-forward="true" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -329,7 +267,7 @@
       <path value="$PROJECT_DIR$/appfront/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-7" />
     <option name="width" value="637" />
     <option name="height" value="735" />
@@ -360,7 +298,7 @@
             <path>
               <item name="Ecds" type="b2602c69:ProjectViewProjectNode" />
               <item name="Ecds" type="462c0819:PsiDirectoryNode" />
-              <item name="api_ecds" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Ecds" type="b2602c69:ProjectViewProjectNode" />
@@ -575,7 +513,14 @@
       <option name="project" value="LOCAL" />
       <updated>1548142977544</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="检测技术文档">
+      <created>1548143096229</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1548143096229</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView">
@@ -588,11 +533,12 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30313015" sideWeight="0.5204236" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3294893" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294893" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42598686" sideWeight="0.4949785" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38385502" sideWeight="0.4795764" order="7" side_tool="false" content_ui="tabs" />
@@ -699,6 +645,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-81">
           <caret line="81" column="6" lean-forward="false" selection-start-line="81" selection-start-column="6" selection-end-line="81" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#31#0" expanded="false" />
+            <element signature="e#3003#3551#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -706,6 +656,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="92" column="21" lean-forward="true" selection-start-line="92" selection-start-column="21" selection-end-line="92" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#28#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -761,6 +714,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
           <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+          <folding>
+            <element signature="e#284#2522#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -832,17 +788,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api_ecds/audit_table.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="38" column="27" lean-forward="false" selection-start-line="38" selection-start-column="27" selection-end-line="38" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/first_column.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1436">
           <caret line="16" column="29" lean-forward="true" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -874,13 +824,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../../../check_searchoooo.py" />
     <entry file="file://$PROJECT_DIR$/../../../check_search.py" />
-    <entry file="file://$PROJECT_DIR$/api_ecds/audit_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="63" column="30" lean-forward="true" selection-start-line="63" selection-start-column="30" selection-end-line="63" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/test.py" />
     <entry file="file://$PROJECT_DIR$/api/i83w.py" />
     <entry file="file://$PROJECT_DIR$/api/oeir.py" />
@@ -987,16 +930,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api_ecds/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/EcdsApp/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="121">
@@ -1026,10 +959,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/api_ecds/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="422">
+          <caret line="19" column="19" lean-forward="true" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/api_ecds/check_search.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+        <state relative-caret-position="187">
+          <caret line="158" column="6" lean-forward="false" selection-start-line="158" selection-start-column="6" selection-end-line="158" selection-end-column="6" />
           <folding>
             <element signature="e#378#1480#0" expanded="false" />
             <element signature="e#1618#3636#0" expanded="false" />
@@ -1043,16 +986,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/api_ecds/audit_table.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="8" column="44" lean-forward="false" selection-start-line="8" selection-start-column="44" selection-end-line="8" selection-end-column="44" />
+          <folding>
+            <element signature="e#262#1825#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api_ecds/audit_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="729">
+          <caret line="94" column="34" lean-forward="true" selection-start-line="94" selection-start-column="34" selection-end-line="94" selection-end-column="34" />
+          <folding>
+            <element signature="e#377#2703#0" expanded="false" />
+            <element signature="e#590#2564#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/api_ecds/accept_record.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="1" column="9" lean-forward="false" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
+        <state relative-caret-position="206">
+          <caret line="8" column="28" lean-forward="true" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
           <folding>
-            <element signature="e#275#2967#0" expanded="false" />
-            <element signature="e#275#312#1" expanded="false" />
-            <element signature="e#366#2967#0" expanded="false" />
-            <element signature="e#700#1392#0" expanded="false" />
-            <element signature="e#2999#6056#0" expanded="false" />
+            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#246#2938#0" expanded="false" />
+            <element signature="e#246#283#1" expanded="false" />
+            <element signature="e#337#2938#0" expanded="false" />
+            <element signature="e#671#1363#0" expanded="false" />
+            <element signature="e#2970#6027#0" expanded="false" />
           </folding>
         </state>
       </provider>
