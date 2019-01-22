@@ -5,6 +5,7 @@ from api.first_column import *
 from api.apply_info import ApplyInfomation
 from api.mk_word import MakeWord, MakeExcel
 from api.search import Search
+from api.Tec_accept import TecAccept
 
 api = Register()
 api.regist(Login('login'))                      # 登陆
@@ -18,3 +19,5 @@ api.regist(ApplyInfomation('applyinfomation'))  # 测试环境申请页面
 api.regist(MakeWord('makeword'))                # 申请信息模板
 api.regist(Search('search'))                    # 管理者搜索
 api.regist(MakeExcel('excel'))                  # 生成excel表格
+api.regist(TecAccept('tecaccept'))              # 验收信息word生成
+api.regist(UploadPdf('uploadpdf'))              # 上传pdf

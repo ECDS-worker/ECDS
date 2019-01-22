@@ -1,14 +1,16 @@
 from _datetime import datetime
 
 from api.utils import json_response
-from EcdsApp.models import ApplyInfo, Insinfo, ContactsInfo, Commentuser, NetInfo
+from EcdsApp.models import ApplyInfo, Insinfo, ContactsInfo, Commentuser, NetInfo, FornPro
 from api.comment import Rest
 from django.contrib.auth import get_user_model
+from api.decorators import commentuser_required
 
 User = get_user_model()
 
 
 class ApplyInfomation(Rest):
+    @commentuser_required
     def get(self, request, *args, **kwargs):
         user = request.user
         if not user.username:
@@ -23,6 +25,7 @@ class ApplyInfomation(Rest):
         try:
             ins = Insinfo.objects.get(ins_nm=user.ins.ins_nm)
             cur_apply = ApplyInfo.objects.get(ins=ins)
+            forn = FornPro.objects.get(ins_nm=ins.ins_nm)
         except Exception as e:
             data["msg"] = e
             return json_response(data)
@@ -32,6 +35,10 @@ class ApplyInfomation(Rest):
                     "ins_nm": ins.ins_nm,
                     "ins_cd": ins.ins_cd,
                     "port": ins.port,
+
+                    "pay_num": ins.pay_num,
+                    "vip_code": ins.vip_code,
+
                     "access_port": ins.access_port
                 }
             ]
@@ -48,12 +55,17 @@ class ApplyInfomation(Rest):
                 "soft_type": cur_apply.soft_type,
                 "mid_message": cur_apply.mid_message,
                 "mid_apply": cur_apply.mid_apply,
-                "pro_version": cur_apply.pro_version,
-                "pro_system": cur_apply.pro_system,
+                "pro_version": forn.pro_version,
+                "pro_system": forn.pro_system,
+
+                "mbfe_type": forn.mbfe_type,
+
                 "first_access": cur_apply.first_access,
                 "access_ty": cur_apply.access_ty,
                 "net_ty": cur_apply.net_ty,
-                "access_obj": cur_apply.access_obj
+                "access_obj": cur_apply.access_obj,
+                "username": cur_apply.contact_nm,
+                # "username": cur_apply.contact_nm,
             }]
 
         user_info = ContactsInfo.objects.filter(ins=ins)
@@ -68,7 +80,7 @@ class ApplyInfomation(Rest):
                 data["user"].append(dic)
         return json_response(data)
 
-    # @commentuser_required
+    @commentuser_required
     def post(self, request, *args, **kwargs):
         user = request.user
         if not user.username:
@@ -95,13 +107,17 @@ class ApplyInfomation(Rest):
         if catalog_id == 1:                                     # 机构基础信息
             ins_name = data.get('ins_nm')
             bank_num = data.get('bank_num')
+            pay_num = data.get('pay_num')
+            vip_code = data.get('vip_code')
             test_num = data.get('test_num')
             production_ccpc = data.get('production_ccpc')
             if ins_name != ins_nm:
                 retu_data["status"] = "0"
                 retu_data["msg"] = "机构名称输入错误"
                 return json_response(retu_data)
-            ApplyInfo.objects.filter(ins=ins, acc_month=now_time).update(bank_num=bank_num, test_num=test_num, production_ccpc=production_ccpc)
+            ApplyInfo.objects.filter(ins=ins, acc_month=now_time).update(bank_num=bank_num, test_num=test_num,
+                                                                         production_ccpc=production_ccpc)
+            Insinfo.objects.filter(ins_nm=ins_nm).update(pay_num=pay_num, vip_code=vip_code)
             retu_data["status"] = "200"
         elif catalog_id == 2:                                   # 系统选择
             system = data.get('system')
@@ -117,9 +133,13 @@ class ApplyInfomation(Rest):
             soft_ty = data.get('soft_type')
             mid_message = data.get('mid_message')
             mid_apply = data.get('mid_apply')
+            mbfe_type = data.get('mbfe_type')
             pro_version = data.get('pro_version')
             pro_system = data.get('pro_system')
-            ApplyInfo.objects.filter(ins=ins, acc_month=now_time).update(soft_nm=soft_nm, soft_type=soft_ty, mid_message=mid_message, mid_apply=mid_apply, pro_ersion=pro_version, pro_system=pro_system)
+            ApplyInfo.objects.filter(ins=ins, acc_month=now_time).update(soft_nm=soft_nm, soft_type=soft_ty,
+                                                                         mid_message=mid_message, mid_apply=mid_apply)
+            FornPro.objects.filter(ins_nm=ins_nm).update(mbfe_type=mbfe_type, pro_version=pro_version,
+                                                         pro_system=pro_system)
             retu_data["status"] = "200"
         elif catalog_id == 5:                                   # 网络接入方式
             net_ty = int(data.get('net_ty'))
@@ -134,14 +154,10 @@ class ApplyInfomation(Rest):
             ins_cd = data.get('ins_cd')
             port = data.get('port')
             access_port = data.get('access_port')
-            Insinfo.objects.filter(ins_nm=ins_nm, acc_month=now_time).update(ins_cd=ins_cd, port=port, access_port=access_port)
+            Insinfo.objects.filter(ins_nm=ins_nm, acc_month=now_time).update(ins_cd=ins_cd, port=port,
+                                                                             access_port=access_port)
             retu_data["status"] = "200"
         elif catalog_id == 8:                                                   # 联系人信息
-            # user_nm = data.get("user_nm")
-            # role = data.get("role")
-            # phone = data.get("phone")
-            # email = data.get("email")
-            # ContactsInfo.objects.update_or_create(name=user_nm, role=role, phone=phone, email=email, ins=ins)
             contact_nm = data.get('contact')
             phone = data.get('phone')
             email = data.get('email')
@@ -152,7 +168,8 @@ class ApplyInfomation(Rest):
             laboratory_ip = data.get('laboratory_ip')
             system_name = data.get('system_name')
             pro_num = data.get('pro_num')
-            pro_EquiInfo = data.get('pro_EquiInfo')
+            pro_equiinfo = data.get('pro_EquiInfo')
             ApplyInfo.objects.filter(ins=ins, acc_month=now_time).update(net_ty=net_ty)
-            NetInfo.objects.filter(ins_nm=ins.ins_nm).update(laboratory_ip=laboratory_ip, system_name=system_name, pro_num=pro_num, pro_EquiInfo=pro_EquiInfo)
+            NetInfo.objects.filter(ins_nm=ins.ins_nm).update(laboratory_ip=laboratory_ip, system_name=system_name,
+                                                             pro_num=pro_num, pro_EquiInfo=pro_equiinfo)
         return json_response(retu_data)

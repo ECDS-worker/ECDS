@@ -5,16 +5,15 @@ from io import BytesIO
 from api.utils import json_response
 import xlwt
 from datetime import datetime
-from api.decorators import ecdsuser_required, commentuser_required
+# from api.decorators import ecdsuser_required, commentuser_required
 
 
 class Search(Rest):
-    # @commentuser_required
     def put(self, request, *args, **kwargs):
-        user = request.user
-        if not user.username:
-            username = request.session.get("username")
-            user = Commentuser.objects.get(username=username)
+        # user = request.user
+        # if not user.username:
+        #     username = request.session.get("username")
+        #     user = Commentuser.objects.get(username=username)
         data = request.PUT
         keyword = data.get("search_keyword", "")
         search_date = data.get("search_date", "")
@@ -41,7 +40,8 @@ class Search(Rest):
                         if not (per_ins.start_time >= start_date and per_ins.end_time <= end_date):
                             apply_info.remove(per_ins)
                 else:
-                    apply_info = ApplyInfo.objects.filter(activate=1, start_time__gte=start_date, end_time__lte=end_date)
+                    apply_info = ApplyInfo.objects.filter(activate=1, start_time__gte=start_date,
+                                                          end_time__lte=end_date)
 
             if column:
                 if apply_info:
@@ -75,7 +75,6 @@ class Search(Rest):
 
         return json_response(retu_data)
 
-    # @commentuser_required
     def get(self, request, *args, **kwargs):
         user = request.user
         if not user.username:

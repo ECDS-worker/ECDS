@@ -90,6 +90,9 @@ class Insinfo(models.Model):
     """
     ins_nm = models.CharField(max_length=64, null=False, help_text="机构名称")
     ins_cd = models.CharField(max_length=16, null=False, help_text="机构号")
+    sum_num = models.CharField(default="", max_length=16, null=True, help_text="总行行号")
+    pay_num = models.CharField(default="", max_length=16, null=True, help_text="支付系统行号")
+    vip_code = models.CharField(default="", max_length=16, null=True, help_text="会员代码")
     ins_tp = models.CharField(default="", max_length=4, null=False, help_text="机构类型")
     ins_st = models.IntegerField(default=0, choices=CONTROL_STATE, help_text="机构状态")
     ins_location = models.CharField(default='', max_length=16, null=True, help_text="机构所在地")
@@ -106,6 +109,7 @@ class Insinfo(models.Model):
     @classmethod
     def create(cls, ins_nm, ins_cd, ins_tp, ins_st):
         return cls(ins_nm=ins_nm, ins_cd=ins_cd, ins_tp=ins_tp, ins_st=ins_st)
+
 
 class UserForm(models.Model):
     """
@@ -133,13 +137,14 @@ class UserForm(models.Model):
 class ApplyInfo(models.Model):
     """
         机构申请信息表
-        审核状态
-        审核人
+        缺少一个接入ECDS方式
     """
     CHECK_STA = (
         (0, "等待审核"),
         (1, "审核通过"),
         (2, "驳回"),
+        (3, "IP分配完成"),
+        (4, "分配测试ccpc")
     )
 
     ACC_TY = (
@@ -150,26 +155,26 @@ class ApplyInfo(models.Model):
     ins = models.ForeignKey('Insinfo', help_text="所属机构表", on_delete=models.CASCADE)
     contact_nm = models.CharField(default="", max_length=16, null=True, help_text="联系人名字")
     bank_num = models.CharField(max_length=32, null=False, help_text="行号")
-    production_ccpc = models.CharField(max_length=32, null=False, help_text="生产CCPC")
-    test_num = models.CharField(max_length=48, null=False, help_text="测试环境接入点号")
+    production_ccpc = models.CharField(default="", max_length=32, null=False, help_text="生产CCPC")
+    test_ccpc = models.CharField(default="", max_length=48, null=True, help_text="测试CCPC")
+    test_num = models.CharField(default="", max_length=48, null=True, help_text="测试环境接入点号")
+    product_num = models.CharField(default="", max_length=48, null=True, help_text="生产环境接入点号")
     phone = models.CharField(default='', max_length=16, blank=True, null=True, help_text="手机号码")
     email = models.EmailField(default='', blank=True, null=True, help_text='邮箱')
     soft_nm = models.CharField(default="", max_length=16, null=True, help_text="内部软件名称")
     soft_type = models.CharField(default="", max_length=32, null=True, help_text="内部系统软件版本")
     mid_message = models.CharField(default="MQ", max_length=32, choices=MQ_TYPE, help_text="消息中间件类型")
     mid_apply = models.CharField(default="MQ", max_length=32, choices=MQ_TYPE, help_text="应用件类型")
-    pro_version = models.CharField(default="", max_length=16, null=True, help_text="前置机MBFE操作系统及版本")
-    pro_system = models.CharField(default="", max_length=16, null=True, help_text="前置机操作系统")
     start_time = models.DateTimeField(auto_now=True, null=True, blank=True, help_text="开始时间")
     end_time = models.DateTimeField(auto_now=True, null=True, blank=True, help_text="结束时间")
     first_access = models.IntegerField(default=1, null=True, blank=True, help_text="是否首次接入")
-    access_ty = models.IntegerField(default=0, choices=ACC_TY, help_text="接入类型")
     net_ty = models.IntegerField(default=0, choices=NET_TY, null=True, blank=True, help_text="网络接入方式")
+    acc_ecds = models.CharField(default=0, max_length=16, null=True, help_text="网络接入方式")
     access_obj = models.TextField(default='', help_text="接入目的")
     check_state = models.IntegerField(default=0, choices=CHECK_STA, null=True, blank=True, help_text="审核状态")
-    check_nm = models.CharField(max_length=20, null=False, help_text="审核人")
+    check_nm = models.CharField(default="", max_length=20, null=False, help_text="审核人")
+    support_name = models.CharField(default="", max_length=16, null=True, help_text="ECDS支持人员信息")
     acc_month = models.CharField(default="", max_length=20, null=False, help_text="加入月份")
-    vpn = models.CharField(default="", max_length=64, null=False, help_text="参与者VPN")
 
     class Meta:
         db_table = "ApplyInfo"
@@ -178,7 +183,8 @@ class ApplyInfo(models.Model):
 
     @classmethod
     def create(cls, ins_nm, ins_cd, ins_tp, ins_st, ins, check_nm):
-        return cls(contact_nm=ins_nm, bank_num=ins_cd, production_ccpc=ins_tp, test_num=ins_st, ins=ins, check_nm=check_nm)
+        return cls(contact_nm=ins_nm, bank_num=ins_cd, production_ccpc=ins_tp, test_num=ins_st, ins=ins,
+                   check_nm=check_nm)
 
 
 class Notice(models.Model):
@@ -209,7 +215,7 @@ class TecDocuments(models.Model):
     filename = models.CharField(max_length=32, null=False, help_text='文件名称')
     up_time = models.DateTimeField(auto_now=True, null=False, help_text='上传时间')
     activate = models.IntegerField(default=0, choices=CONTROL_STATE, help_text="活跃状态")
-    end_time = models.DateTimeField(auto_now_add=True, help_text="失效时间")
+    end_time = models.DateTimeField(auto_now=False, null=False, blank=False, help_text="失效时间")
     priority = models.IntegerField(default=9, null=True, blank=True, help_text="优先级")
 
     class Meta:
@@ -294,36 +300,14 @@ class TimeMax(models.Model):
         verbose_name_plural = verbose_name
 
 
-class JoinTest(models.Model):
-    """
-    接入者测试与信息登记表
-    """
-    netinfo = models.ForeignKey("NetInfo", help_text="网络信息配置", on_delete=models.CASCADE)
-    forninfo = models.ForeignKey("Forn_Pro", help_text="前置机信息", on_delete=models.CASCADE)
-
-    test_ccpc = models.CharField(max_length=48, null=True, help_text="测试CCPC")
-    bank_num = models.CharField(max_length=32, null=True, help_text="测试机构名称")
-    test_num = models.CharField(max_length=48, null=True, help_text="测试环境接入点号")
-    production_env = models.CharField(default="", max_length=48, null=True, help_text="生产环节接入点号")
-    production_ccpc = models.CharField(default="", max_length=32, null=True, help_text="生产CCPC")
-    mid_name = models.IntegerField(default="", choices=MQ_TYPE, null=True, help_text="中间件类型")
-    mid_type = models.CharField(default="", max_length=32, help_text="中间件版本")
-    apply_month = models.CharField(max_length=48, null=True, help_text="申请月份")
-    support_name = models.CharField(max_length=16, null=True, help_text="ECDS支持人员信息")
-    progress_text = models.TextField()
-
-    class Meta:
-        db_table = "JoinTest"
-        verbose_name = "接入者测试与信息登记表"
-        verbose_name_plural = verbose_name
-
-
-class Forn_Pro(models.Model):
+class FornPro(models.Model):
     """
     前置机信息表
     """
-    ins_name = models.CharField(default="", max_length=64, help_text="机构名称")
+    aply_info = models.ForeignKey("ApplyInfo", help_text="机构信息表", on_delete=models.CASCADE)
     bank_num = models.CharField(default="", max_length=64, help_text="支付系统行号")
+    ins_nm = models.CharField(default="", max_length=64, help_text="机构名称")
+    mbfe_type = models.CharField(default="", max_length=64, help_text="MBFE版本")
     mid_type = models.CharField(default="", max_length=64, help_text="中间件类型")
     port = models.CharField(default="", max_length=64, help_text="队列消息管理器")
     join_num = models.CharField(default="", max_length=64, help_text="接入点号")
@@ -331,7 +315,7 @@ class Forn_Pro(models.Model):
     pro_system = models.CharField(max_length=128, null=True, help_text="前置机操作系统")
 
     class Meta:
-        db_table = "Forn_Pro"
+        db_table = "fornpro"
         verbose_name = "前置机信息表"
         verbose_name_plural = verbose_name
 
@@ -339,14 +323,15 @@ class Forn_Pro(models.Model):
 class NetInfo(models.Model):
     """
     网络配置信息表
+    IP_R2C1和ip字段需要交换位置
     """
-    ins_name = models.CharField(max_length=20, null=True, help_text="测试机构名称")
-
+    aply_info = models.ForeignKey("ApplyInfo", help_text="机构信息表", on_delete=models.CASCADE)
+    ins_nm = models.CharField(default="", max_length=64, help_text="机构名称")
     net_ty = models.IntegerField(default=0, choices=NET_TY, null=True, blank=True, help_text="vpn网络接入方式")
-    IP_R2C1 = models.CharField(max_length=32, null=True, help_text="参与者 VPN接入设备公网地址")
+    ip = models.CharField(max_length=32, null=True, help_text="参与者 VPN接入设备公网地址")
     system_name = models.CharField(max_length=32, null=True, help_text="接入业务系统名称")
     pro_num = models.CharField(max_length=32, null=True, help_text="业务前置机数量")
-    ip = models.CharField(max_length=32, null=True, help_text="参与者外联通信IP地址")
+    IP_R2C1 = models.CharField(max_length=32, null=True, help_text="参与者外联通信IP地址")
     laboratory_ip = models.CharField(max_length=32, null=True, help_text="VPN接入实验室测试环境设备公网地址")
     server_ip = models.CharField(max_length=32, null=True, help_text="系统接入测试实验室服务器外部通信地址段")
     pro_EquiInfo = models.CharField(max_length=48, null=True, help_text="参与者VPN接入设备信息（品牌、型号）")
@@ -354,4 +339,97 @@ class NetInfo(models.Model):
     class Meta:
         db_table = "NetInfo"
         verbose_name = "前置机信息表"
+        verbose_name_plural = verbose_name
+
+
+class AcceptCheck(models.Model):
+    """
+        接入验收信息统计表
+        缺少审核状态
+    """
+    CHECK_STA = (
+        (0, "待审核"),
+        (1, "审核通过"),
+        (2, "驳回")
+    )
+    ins_nm = models.CharField(default="", max_length=64, null=True, help_text="机构名称")
+    acce_ty = models.CharField(default="", max_length=64, null=True, help_text="接入类型")
+    dedicated = models.CharField(default="", max_length=64, null=True, help_text="专线情况")
+    apply_date = models.DateTimeField(auto_now_add=True, null=True, blank=True, help_text="申请日期")
+    reply = models.CharField(default="", max_length=64, null=True, help_text="批复文件")
+    all_month = models.CharField(default="", max_length=64, null=True, help_text="是否至少测试一月")
+    acces_detec = models.CharField(default="", max_length=64, null=True, help_text="接入端软件测试")
+    check_time1 = models.DateTimeField(null=True, blank=True, help_text="验收时间")
+    acces_info = models.CharField(default="", max_length=64, null=True, help_text="接入端信息系统检查")
+    check_time2 = models.DateTimeField(blank=True, null=True, help_text="验收时间")
+    env_check = models.CharField(default="", max_length=64, null=True, help_text="接入环境检查")
+    check_time3 = models.DateTimeField(blank=True, null=True, help_text="验收时间")
+    region = models.CharField(default="", max_length=64, null=True, help_text="区域")
+    city = models.CharField(default="", max_length=64, null=True, help_text="城市")
+    contacts = models.CharField(default="", max_length=64, null=True, help_text="联系人")
+    phone = models.CharField(default="", max_length=64, null=True, help_text="联系电话")
+    email = models.CharField(default="", max_length=64, null=True, help_text="邮箱")
+    computer_adr = models.CharField(default="", max_length=64, null=True, help_text="机房地址")
+
+    company_adr = models.CharField(default="", max_length=64, null=True, help_text="单位地址")
+    zip_code = models.CharField(default="", max_length=64, null=True, help_text="邮编")
+    fax = models.CharField(default="", max_length=16, null=True, help_text="传真")
+    check_state = models.IntegerField(default=0, choices=CHECK_STA, help_text="审核状态")
+    Spare = models.CharField(default="", max_length=16, null=True, help_text="备用字段")
+
+    class Meta:
+        db_table = "acceptcheck"
+        verbose_name = "参与者系统接入表"
+        verbose_name_plural = verbose_name
+
+
+class SoftInfo(models.Model):
+    """
+        技术验收软件信息表
+        空白处可以添加外键进行关联
+    """
+    acceptcheck = models.ForeignKey("AcceptCheck", on_delete=models.CASCADE, help_text="接入测试信息表")
+    soft_nm = models.CharField(default="", max_length=32, null=True, help_text="软件名称")
+    soft_ty = models.CharField(default="", max_length=16, null=True, help_text="软件版本")
+    mid_ty = models.CharField(default="", max_length=64, null=True, help_text="中间件及版本")
+    database = models.CharField(default="", max_length=32, null=True, help_text="数据库名称及版本")
+    operat_sys = models.CharField(default="", max_length=64, null=True, help_text="操作系统平台及版本")
+    cd_num = models.CharField(default="", max_length=4, null=True, help_text="光盘数量")
+    instruct_num = models.CharField(default="", max_length=4, null=True, help_text="说明书数量")
+    enclosure_num = models.CharField(default="", max_length=4, null=True, help_text="附件数量")
+    # pro_line_num = models.CharField(default="", max_length=16, null=True, help_text="生产环境行号")
+    # pro_acc_num = models.CharField(default="", max_length=16, null=True, help_text="生产环境接入点号")
+    # test_line_num = models.CharField(default="", max_length=16, null=True, help_text="测试环境行号")
+    # test_acc_num = models.CharField(default="", max_length=16, null=True, help_text="生产环境接入点号")
+    # front_info = models.CharField(default="", max_length=64, null=True, help_text="前置机部署情况")
+    # MBFE = models.CharField(default="", max_length=8, null=True, help_text="MBFE版本号")
+    # apply_mid = models.CharField(default="", max_length=32, null=True, help_text="应用部署中间件及版本")
+    # message_mid = models.CharField(default="", max_length=32, null=True, help_text="消息中间件")
+    test_descrip = models.TextField(max_length=512, help_text="测试说明")
+    acces_sys = models.CharField(default="", max_length=16, null=True, help_text="接入系统")
+    acces_type = models.CharField(default="", max_length=16, null=True, help_text="接入方式")
+    Spare = models.CharField(default="", max_length=16, null=True, help_text="备用字段")
+
+    class Meta:
+        db_table = "softinfo"
+        verbose_name = "技术验收软件信息表"
+        verbose_name_plural = verbose_name
+
+
+class TestFile(models.Model):
+    """
+        检测技术文档  待用
+    """
+    up_user = models.CharField(max_length=32, null=False, help_text="上传人")
+    up_date = models.DateTimeField(auto_now=True, null=True, blank=True, help_text="上传时间")
+    file_nm = models.CharField(max_length=64, null=False, help_text="上传文件名称")
+    file_url = models.CharField(max_length=128, null=False, help_text="文件上传路径")
+    check_status = models.IntegerField(default=0, choices=CONTROL_STATE, help_text="审核状态")
+    end_time = models.DateTimeField(auto_now=False, null=False, blank=False, help_text="失效时间")
+    priority = models.IntegerField(default=9, null=True, blank=True, help_text="优先级")
+    spare = models.CharField(default="", max_length=16, null=True, help_text="备用字段")
+
+    class Meta:
+        db_table = "testfile"
+        verbose_name = "检测技术文档"
         verbose_name_plural = verbose_name

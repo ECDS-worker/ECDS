@@ -1,25 +1,25 @@
 from mailmerge import MailMerge
-from EcdsApp.models import ApplyInfo, Commentuser
-from api.comment import Rest
 from django.http import FileResponse
 from django.http import HttpResponse
 from io import BytesIO
 import os
 import xlwt
 
+from EcdsApp.models import ApplyInfo, Commentuser, FornPro
+from api.comment import Rest
+from api.decorators import commentuser_required
+
 
 class MakeWord(Rest):
     """
         生成word模板
     """
+    @commentuser_required
     def get(self, request, *args, **kwargs):
-        user = request.user
-        if not user.username:
-            username = request.session.get("username")
-            user = Commentuser.objects.get(username=username)
-
+        username = request.session.get("username")
+        user = Commentuser.objects.get(username=username)
         ins = Commentuser.objects.get(username=user.username).ins
-
+        forn = FornPro.objects.get(ins_nm=ins.ins_nm)
         apply_ins = ApplyInfo.objects.get(ins=ins)
 
         if apply_ins.first_access == 1:
@@ -54,11 +54,11 @@ class MakeWord(Rest):
             soft_type=apply_ins.soft_type,
             mid_message=apply_ins.mid_message,
             mid_apply=apply_ins.mid_apply,
-            pro_version=apply_ins.pro_version,
-            pro_system=apply_ins.pro_system,
+            pro_version=forn.pro_version,
+            pro_system=forn.pro_system,
             fs=fs,
             sn=sn,
-            ins_mid=apply_ins.net_ty,
+            ins_mid=apply_ins.mid_message,
             net_ty_1=net_ty_1,
             net_ty_2=net_ty_2,
             access_obj=apply_ins.access_obj,

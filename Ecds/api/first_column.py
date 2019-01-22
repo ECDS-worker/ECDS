@@ -13,7 +13,8 @@ class Index(Rest):
             username = request.session.get("username")
             user = Commentuser.objects.get(username=username)
         data = {
-            "username": user.username
+            "username": user.username,
+            "role": user.role
         }
         try:
             # 主页公告栏
@@ -56,7 +57,7 @@ class Index(Rest):
         :param args: filename
         """
         data = request.POST
-        file_id = data.get('id', '')
+        file_id = int(data.get('id', ''))
         try:
             notic_content = Notice.objects.filter(activate=1).order_by('start_time')[file_id].notice_cont
         except Exception as e:

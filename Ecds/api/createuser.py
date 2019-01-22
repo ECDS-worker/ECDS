@@ -25,8 +25,8 @@ def create_user():
         for i in range(0, 6):
             ins_cd += yzm[random.randrange(0, len(yzm))]
         ins = Insinfo.objects.get(id=j)
-        ins_tp = random.randint(0,2)
-        ins_st = random.randint(0,2)
+        ins_tp = random.randint(0, 2)
+        ins_st = random.randint(0, 2)
         check_nm = "sfkughieugrn"
 
         user2 = ApplyInfo.create(ins_nm, ins_cd, ins_tp, ins_st, ins, check_nm)

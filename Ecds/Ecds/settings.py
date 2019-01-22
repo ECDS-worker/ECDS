@@ -60,6 +60,7 @@ MIDDLEWARE = [
 # vue跨域 中间件插入第三行
 CORS_ORIGIN_ALLOW_ALL = True
 
+
 ROOT_URLCONF = 'Ecds.urls'
 
 TEMPLATES = [
@@ -102,7 +103,7 @@ DATABASES = {
         'NAME': 'test',
         'USER': 'root',
         'PASSWORD': 'hhh123',
-        'HOST': '10.3.60.108',
+        'HOST': 'localhost',
         'PORT': 3306
     }
 }
